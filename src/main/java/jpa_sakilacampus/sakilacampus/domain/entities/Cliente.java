@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +19,9 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cliente;
 
-    @Column(columnDefinition = "TINYINT", nullable = false)
-    private Integer id_almacen;
+    @ManyToOne
+    @JoinColumn(name = "id_almacen")
+    private Almacen id_almacen;
 
     @Column(columnDefinition = "VARCHAR(45)", nullable = false)
     private String nombre;
@@ -29,8 +32,8 @@ public class Cliente {
     @Column(columnDefinition = "VARCHAR(50)", nullable = false)
     private String email;
 
-    @Column(columnDefinition = "smallint", nullable = false)
-    private Integer id_direccion;
+    @ManyToOne
+    private Direccion id_direccion;
 
     @Column(columnDefinition = "TINYINT(1)", nullable = false)
     private Integer activo;
@@ -53,12 +56,12 @@ public class Cliente {
     }
 
 
-    public Integer getId_almacen() {
+    public Almacen getId_almacen() {
         return id_almacen;
     }
 
 
-    public void setId_almacen(Integer id_almacen) {
+    public void setId_almacen(Almacen id_almacen) {
         this.id_almacen = id_almacen;
     }
 
@@ -93,12 +96,12 @@ public class Cliente {
     }
 
 
-    public Integer getId_direccion() {
+    public Direccion getId_direccion() {
         return id_direccion;
     }
 
 
-    public void setId_direccion(Integer id_direccion) {
+    public void setId_direccion(Direccion id_direccion) {
         this.id_direccion = id_direccion;
     }
 
@@ -131,9 +134,4 @@ public class Cliente {
     public void setUltima_actualizacion(LocalDateTime ultima_actualizacion) {
         this.ultima_actualizacion = ultima_actualizacion;
     }
-
-    
-
-    
-
 }
